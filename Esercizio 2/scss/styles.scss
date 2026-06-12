@@ -1,0 +1,570 @@
+// =====================================================================
+//  LipariBank · Foglio di stile (SCSS)
+//  Architettura: variabili → mixin → reset → layout → componenti (BEM)
+// =====================================================================
+@use "sass:map";
+
+// ----------------------------- VARIABILI ----------------------------
+// Colori istituzionali
+$color-primary:        #1a365d; // navy
+$color-primary-700:    #142a4a;
+$color-primary-900:    #0d1c33;
+$color-secondary:      #c8a84b; // oro
+$color-secondary-300:  #e2cd8c;
+
+$color-bg:             #f4f6f9;
+$color-surface:        #ffffff;
+$color-border:         #e3e8f0;
+$color-ink:            #1c2433;
+$color-ink-soft:       #5a6577;
+$color-ink-faint:      #8b94a3;
+
+$color-positive:       #1f8a5b;
+$color-positive-bg:    #e6f4ec;
+$color-negative:       #b4452f;
+$color-warn:           #b07d12;
+$color-warn-bg:        #fbf2dc;
+
+// Tipografia
+$font-display: "Fraunces", Georgia, "Times New Roman", serif;
+$font-body:    "Manrope", "Segoe UI", system-ui, sans-serif;
+
+// Scala di spaziatura (base 4px)
+$space: (
+  0: 0,
+  1: .25rem,   // 4
+  2: .5rem,    // 8
+  3: .75rem,   // 12
+  4: 1rem,     // 16
+  5: 1.5rem,   // 24
+  6: 2rem,     // 32
+  7: 2.5rem,   // 40
+  8: 3.5rem,   // 56
+);
+@function sp($key) { @return map.get($space, $key); }
+
+// Forma e profondità
+$radius:     14px;
+$radius-sm:  10px;
+$shadow-sm:  0 1px 2px rgba(13, 28, 51, .06);
+$shadow-md:  0 8px 24px -12px rgba(13, 28, 51, .22);
+$shadow-lg:  0 24px 60px -28px rgba(13, 28, 51, .45);
+
+$sidebar-w:  250px;
+$header-h:   72px;
+$bp-mobile:  768px;
+
+// ------------------------------ MIXIN -------------------------------
+@mixin respond-down($bp: $bp-mobile) {
+  @media (max-width: ($bp - 1px)) { @content; }
+}
+@mixin respond-up($bp: $bp-mobile) {
+  @media (min-width: $bp) { @content; }
+}
+@mixin flex-center { display: flex; align-items: center; justify-content: center; }
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $color-secondary;
+    outline-offset: 2px;
+  }
+}
+
+// ------------------------------ RESET -------------------------------
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { scroll-behavior: smooth; }
+
+body.app {
+  font-family: $font-body;
+  color: $color-ink;
+  background-color: $color-bg;
+  // texture diagonale finissima + alone navy in alto
+  background-image:
+    radial-gradient(120% 60% at 100% 0%, rgba(26, 54, 93, .06), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(26, 54, 93, .018) 0 2px, transparent 2px 11px);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; padding: 0; }
+button { font: inherit; cursor: pointer; border: 0; background: none; }
+svg { display: block; }
+
+// ============================== HEADER ==============================
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: $header-h;
+  background: linear-gradient(100deg, $color-primary-900, $color-primary);
+  color: #fff;
+  box-shadow: $shadow-md;
+
+  &__inner {
+    height: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 sp(5);
+    display: flex;
+    align-items: center;
+    gap: sp(5);
+    @include respond-down { padding: 0 sp(4); gap: sp(3); }
+  }
+}
+
+// --------- Brand ---------
+.brand {
+  display: flex;
+  align-items: center;
+  gap: sp(3);
+  @include focus-ring;
+
+  &__mark {
+    @include flex-center;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    color: $color-primary-900;
+    background: linear-gradient(150deg, $color-secondary-300, $color-secondary);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.25), $shadow-sm;
+  }
+  &__text { display: flex; flex-direction: column; line-height: 1.1; }
+  &__name {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: .2px;
+  }
+  &__tag {
+    font-size: .68rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: $color-secondary-300;
+  }
+  @include respond-down { &__tag { display: none; } }
+}
+
+// --------- Nav primaria ---------
+.nav {
+  margin-left: sp(5);
+  @include respond-down { display: none; }
+
+  &__list { display: flex; gap: sp(2); }
+  &__link {
+    display: inline-block;
+    padding: sp(2) sp(3);
+    border-radius: 999px;
+    font-size: .92rem;
+    font-weight: 600;
+    color: rgba(255,255,255,.7);
+    transition: color .18s ease, background-color .18s ease;
+    @include focus-ring;
+
+    &:hover { color: #fff; background: rgba(255,255,255,.08); }
+    &--active {
+      color: $color-primary-900;
+      background: $color-secondary;
+      &:hover { background: $color-secondary-300; }
+    }
+  }
+}
+
+// --------- User ---------
+.user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: sp(4);
+
+  &__bell {
+    position: relative;
+    @include flex-center;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    background: rgba(255,255,255,.08);
+    transition: background-color .18s ease;
+    @include focus-ring;
+    &:hover { background: rgba(255,255,255,.16); }
+  }
+  &__badge {
+    position: absolute;
+    top: 6px; right: 6px;
+    min-width: 16px; height: 16px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: $color-secondary;
+    color: $color-primary-900;
+    font-size: .62rem;
+    font-weight: 800;
+    @include flex-center;
+    box-shadow: 0 0 0 2px $color-primary;
+  }
+
+  &__profile { display: flex; align-items: center; gap: sp(3); }
+  &__avatar {
+    @include flex-center;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: .85rem;
+    color: $color-primary-900;
+    background: linear-gradient(150deg, $color-secondary-300, $color-secondary);
+  }
+  &__meta { display: flex; flex-direction: column; line-height: 1.2; }
+  &__name { font-weight: 700; font-size: .9rem; }
+  &__role { font-size: .72rem; color: $color-secondary-300; }
+
+  @include respond-down { &__meta { display: none; } }
+}
+
+// =========================== LAYOUT SHELL ===========================
+// Grid macro: sidebar fissa + contenuto fluido
+.shell {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: $sidebar-w 1fr;
+  align-items: start;
+
+  @include respond-down {
+    grid-template-columns: 1fr; // la sidebar collassa fuori dal flusso
+  }
+}
+
+// ============================= SIDEBAR ==============================
+.sidebar {
+  position: sticky;
+  top: $header-h;
+  height: calc(100vh - #{$header-h});
+  padding: sp(5) sp(4);
+  display: flex;
+  flex-direction: column;
+  gap: sp(5);
+  background: $color-surface;
+  border-right: 1px solid $color-border;
+
+  // Mobile: collassa (nascosta, pronta a slide-in)
+  @include respond-down {
+    position: fixed;
+    top: $header-h;
+    left: 0;
+    width: $sidebar-w;
+    transform: translateX(-100%);
+    transition: transform .28s ease;
+    z-index: 40;
+    box-shadow: $shadow-lg;
+  }
+
+  &__heading {
+    font-size: .68rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: $color-ink-faint;
+    padding: 0 sp(3) sp(2);
+    &--spaced { margin-top: sp(4); }
+  }
+
+  &__list { display: flex; flex-direction: column; gap: sp(1); }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: sp(3);
+    padding: sp(3);
+    border-radius: $radius-sm;
+    color: $color-ink-soft;
+    font-weight: 600;
+    font-size: .92rem;
+    position: relative;
+    transition: background-color .16s ease, color .16s ease;
+    @include focus-ring;
+
+    &:hover { background: rgba(26,54,93,.05); color: $color-primary; }
+
+    &--active {
+      color: $color-primary;
+      background: rgba(26,54,93,.08);
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0; top: 50%;
+        transform: translateY(-50%);
+        width: 3px; height: 60%;
+        border-radius: 0 3px 3px 0;
+        background: $color-secondary;
+      }
+    }
+  }
+
+  &__icon { @include flex-center; width: 22px; height: 22px; flex-shrink: 0; }
+
+  // --------- Promo box ---------
+  &__promo {
+    margin-top: auto;
+    padding: sp(4);
+    border-radius: $radius;
+    color: #fff;
+    background:
+      radial-gradient(120% 100% at 100% 0%, rgba(200,168,75,.5), transparent 55%),
+      linear-gradient(160deg, $color-primary, $color-primary-900);
+    box-shadow: $shadow-md;
+  }
+  &__promo-kicker {
+    font-size: .66rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: $color-secondary-300;
+  }
+  &__promo-text {
+    font-family: $font-display;
+    font-size: 1rem;
+    line-height: 1.35;
+    margin: sp(2) 0 sp(3);
+  }
+  &__promo-btn {
+    width: 100%;
+    padding: sp(2) sp(3);
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: .85rem;
+    color: $color-primary-900;
+    background: $color-secondary;
+    transition: background-color .16s ease, transform .16s ease;
+    @include focus-ring;
+    &:hover { background: $color-secondary-300; transform: translateY(-1px); }
+  }
+}
+
+// ============================== MAIN ================================
+.main {
+  padding: sp(6) sp(6) sp(8);
+  @include respond-down { padding: sp(5) sp(4) sp(7); }
+
+  &__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: sp(4);
+    flex-wrap: wrap;
+    margin-bottom: sp(6);
+  }
+  &__eyebrow {
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: $color-secondary;
+    text-transform: uppercase;
+  }
+  &__title {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    color: $color-primary;
+    letter-spacing: -.01em;
+    margin-top: sp(1);
+  }
+  &__date { font-size: .82rem; color: $color-ink-faint; }
+}
+
+// =========================== WIDGETS GRID ===========================
+.widgets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: sp(5);
+
+  @media (max-width: 1080px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include respond-down {
+    grid-template-columns: 1fr; // i widget si impilano in colonna
+    gap: sp(4);
+  }
+}
+
+// ============================== CARD ===============================
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: sp(5);
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  box-shadow: $shadow-sm;
+  transition: box-shadow .22s ease, transform .22s ease, border-color .22s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-md;
+    border-color: rgba(200,168,75,.5);
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: sp(3);
+    margin-bottom: sp(4);
+  }
+  &__icon {
+    @include flex-center;
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    color: $color-primary;
+    background: rgba(26,54,93,.08);
+    &--gold { color: $color-warn; background: rgba(200,168,75,.16); }
+  }
+  &__title {
+    font-size: .95rem;
+    font-weight: 700;
+    color: $color-ink-soft;
+  }
+
+  // Variante "feature": saldo in evidenza, fondo navy
+  &--feature {
+    color: #fff;
+    border-color: transparent;
+    background:
+      radial-gradient(130% 80% at 0% 0%, rgba(200,168,75,.22), transparent 50%),
+      linear-gradient(155deg, $color-primary, $color-primary-900);
+    box-shadow: $shadow-md;
+
+    .card__title { color: rgba(255,255,255,.78); }
+    .card__sub   { color: rgba(255,255,255,.6); }
+    .card__foot-label { color: rgba(255,255,255,.6); }
+  }
+
+  &__amount {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    letter-spacing: -.02em;
+    line-height: 1.05;
+  }
+  &__decimals { font-size: .55em; opacity: .7; }
+
+  &__sub {
+    margin-top: sp(2);
+    font-size: .78rem;
+    color: $color-ink-faint;
+  }
+
+  &__foot {
+    margin-top: sp(4);
+    padding-top: sp(3);
+    border-top: 1px solid rgba(255,255,255,.14);
+    display: flex;
+    align-items: center;
+    gap: sp(2);
+    font-size: .82rem;
+
+    &--link {
+      border-top-color: $color-border;
+      margin-top: auto;
+    }
+  }
+  &__foot-label { color: $color-ink-faint; }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: sp(1);
+    font-weight: 700;
+    color: $color-primary;
+    transition: gap .18s ease, color .18s ease;
+    @include focus-ring;
+    &:hover { gap: sp(2); color: $color-secondary; }
+  }
+}
+
+// Indicatore di trend — element di .card, non block autonomo
+.card__trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px sp(2);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .78rem;
+  &--up {
+    color: #fff;
+    background: rgba(31,138,91,.9);
+  }
+}
+
+// ----------- Lista movimenti (flexbox interno) -----------
+.txn {
+  display: flex;
+  flex-direction: column;
+  gap: sp(1);
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: sp(3);
+    padding: sp(2) 0;
+    & + & { border-top: 1px solid $color-border; }
+  }
+  &__icon {
+    @include flex-center;
+    width: 30px; height: 30px;
+    border-radius: 9px;
+    font-size: .9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    &--in  { color: $color-positive; background: $color-positive-bg; }
+    &--out { color: $color-negative; background: #f6e7e3; }
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+  }
+  &__name {
+    font-size: .86rem;
+    font-weight: 600;
+    color: $color-ink;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__date { font-size: .72rem; color: $color-ink-faint; }
+  &__amount {
+    font-weight: 700;
+    font-size: .85rem;
+    white-space: nowrap;
+    &--in  { color: $color-positive; }
+    &--out { color: $color-ink; }
+  }
+}
+
+// ----------- Lista polizze (flexbox interno) -----------
+.policy {
+  display: flex;
+  flex-direction: column;
+  gap: sp(1);
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: sp(3);
+    padding: sp(2) 0;
+    & + & { border-top: 1px solid $color-border; }
+  }
+  &__body { display: flex; flex-direction: column; }
+  &__name { font-size: .86rem; font-weight: 600; }
+  &__id { font-size: .72rem; color: $color-ink-faint; letter-spacing: .04em; }
+
+  &__state {
+    font-size: .7rem;
+    font-weight: 700;
+    padding: 3px sp(2);
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    &--active { color: $color-positive; background: $color-positive-bg; }
+    &--soon   { color: $color-warn;     background: $color-warn-bg; }
+  }
+}
