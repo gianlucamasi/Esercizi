@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LipariBank — Accedi alla tua area riservata in modo sicuro." />
+  <title>LipariBank · Accedi</title>
+
+  <!-- Tipografia: Fraunces (display serif) + Manrope (corpo grotesque) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body class="login-page-body">
+
+  <main class="login-page">
+    <form class="login" action="#" method="post" novalidate>
+      <fieldset class="login__fieldset">
+        <legend class="login__legend">Accedi al tuo conto</legend>
+
+        <!-- Brand: link alla panoramica -->
+        <a class="login__brand" href="index.html" aria-label="LipariBank — Home">
+          <span class="login__brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+              <path d="M16 2 3 9v3h26V9L16 2Z" fill="currentColor"/>
+              <rect x="6"  y="14" width="3" height="9" fill="currentColor"/>
+              <rect x="12" y="14" width="3" height="9" fill="currentColor"/>
+              <rect x="18" y="14" width="3" height="9" fill="currentColor"/>
+              <rect x="24" y="14" width="3" height="9" fill="currentColor"/>
+              <rect x="3"  y="25" width="26" height="4" rx="1" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="login__brand-name">LipariBank</span>
+        </a>
+
+        <div class="login__field">
+          <label class="login__label" for="email">Email</label>
+          <input class="login__input" id="email" name="email"
+                 type="email" required autocomplete="email"
+                 aria-describedby="email-hint" placeholder="nome@esempio.it" />
+          <small class="login__hint" id="email-hint">Inserisci l'indirizzo associato al tuo conto.</small>
+        </div>
+
+        <div class="login__field">
+          <label class="login__label" for="password">Password</label>
+          <input class="login__input" id="password" name="password"
+                 type="password" required minlength="8"
+                 autocomplete="current-password"
+                 aria-describedby="password-hint" />
+          <small class="login__hint" id="password-hint">Almeno 8 caratteri.</small>
+        </div>
+
+        <button class="login__submit" type="submit">Accedi</button>
+
+        <p class="login__alt">
+          Vai a
+          <a class="login__alt-link" href="dashboard.html">Dashboard</a> ·
+          <a class="login__alt-link" href="transactions.html">Movimenti</a>
+        </p>
+      </fieldset>
+    </form>
+  </main>
+
+</body>
+</html>

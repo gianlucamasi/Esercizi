@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LipariBank — Elenco completo dei movimenti del conto." />
+  <title>LipariBank · Movimenti</title>
+
+  <!-- Tipografia: Fraunces (display serif) + Manrope (corpo grotesque) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/transactions.css" />
+</head>
+<body class="transactions-body">
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="app-header">
+    <a class="app-header__brand" href="index.html" aria-label="LipariBank — Home">
+      <span class="app-header__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <path d="M16 2 3 9v3h26V9L16 2Z" fill="currentColor"/>
+          <rect x="6"  y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="12" y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="18" y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="24" y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="3"  y="25" width="26" height="4" rx="1" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="app-header__name">LipariBank</span>
+    </a>
+
+    <nav class="app-header__nav" aria-label="Navigazione primaria">
+      <ul class="app-header__nav-list">
+        <li><a class="app-header__nav-link" href="index.html">Panoramica</a></li>
+        <li><a class="app-header__nav-link" href="dashboard.html">Dashboard</a></li>
+        <li><a class="app-header__nav-link app-header__nav-link--active" href="transactions.html" aria-current="page">Movimenti</a></li>
+        <li><a class="app-header__nav-link" href="login.html">Accedi</a></li>
+      </ul>
+    </nav>
+
+    <div class="app-header__user">
+      <span class="app-header__avatar" aria-hidden="true">GM</span>
+      <span class="app-header__user-meta">
+        <span class="app-header__user-name">Gianluca Masi</span>
+        <span class="app-header__user-role">Cliente Premium</span>
+      </span>
+    </div>
+  </header>
+
+  <!-- ============================ MAIN ============================ -->
+  <main class="app-main">
+    <div class="app-main__head">
+      <p class="app-main__eyebrow">Conto corrente</p>
+      <h1 class="app-main__title">Tutti i movimenti</h1>
+    </div>
+
+    <div class="table-wrap">
+      <table class="transactions">
+        <thead>
+          <tr>
+            <th scope="col">Data</th>
+            <th scope="col">Descrizione</th>
+            <th scope="col" class="transactions__col-amount">Importo</th>
+            <th scope="col">Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-transaction-id="T001" data-type="credit">
+            <td data-label="Data">27 mag 2026</td>
+            <td data-label="Descrizione">Accredito stipendio</td>
+            <td data-label="Importo" class="amount amount--credit">+ € 3.450,00</td>
+            <td data-label="Tipo">Entrata</td>
+          </tr>
+          <tr data-transaction-id="T002" data-type="debit">
+            <td data-label="Data">10 giu 2026</td>
+            <td data-label="Descrizione">Bonifico — Affitto studio</td>
+            <td data-label="Importo" class="amount amount--debit">− € 1.200,00</td>
+            <td data-label="Tipo">Uscita</td>
+          </tr>
+          <tr data-transaction-id="T003" data-type="debit">
+            <td data-label="Data">24 mag 2026</td>
+            <td data-label="Descrizione">Carta — Apple Store</td>
+            <td data-label="Importo" class="amount amount--debit">− € 289,00</td>
+            <td data-label="Tipo">Uscita</td>
+          </tr>
+          <tr data-transaction-id="T004" data-type="credit">
+            <td data-label="Data">18 mag 2026</td>
+            <td data-label="Descrizione">Rimborso assicurazione</td>
+            <td data-label="Importo" class="amount amount--credit">+ € 1.670,00</td>
+            <td data-label="Tipo">Entrata</td>
+          </tr>
+          <tr data-transaction-id="T005" data-type="debit">
+            <td data-label="Data">05 giu 2026</td>
+            <td data-label="Descrizione">Bolletta energia</td>
+            <td data-label="Importo" class="amount amount--debit">− € 142,00</td>
+            <td data-label="Tipo">Uscita</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+</body>
+</html>

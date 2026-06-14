@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LipariBank — Dashboard: saldo, entrate, uscite e ultimi movimenti." />
+  <title>LipariBank · Dashboard</title>
+
+  <!-- Tipografia: Fraunces (display serif) + Manrope (corpo grotesque) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="app-header">
+    <!-- Logo -->
+    <a class="app-header__brand" href="index.html" aria-label="LipariBank — Home">
+      <span class="app-header__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <path d="M16 2 3 9v3h26V9L16 2Z" fill="currentColor"/>
+          <rect x="6"  y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="12" y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="18" y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="24" y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="3"  y="25" width="26" height="4" rx="1" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="app-header__name">LipariBank</span>
+    </a>
+
+    <!-- Nav -->
+    <nav class="app-header__nav" aria-label="Navigazione primaria">
+      <ul class="app-header__nav-list">
+        <li><a class="app-header__nav-link" href="index.html">Panoramica</a></li>
+        <li><a class="app-header__nav-link app-header__nav-link--active" href="dashboard.html" aria-current="page">Dashboard</a></li>
+        <li><a class="app-header__nav-link" href="transactions.html">Movimenti</a></li>
+        <li><a class="app-header__nav-link" href="login.html">Accedi</a></li>
+      </ul>
+    </nav>
+
+    <!-- User info -->
+    <div class="app-header__user">
+      <span class="app-header__avatar" aria-hidden="true">GM</span>
+      <span class="app-header__user-meta">
+        <span class="app-header__user-name">Gianluca Masi</span>
+        <span class="app-header__user-role">Cliente Premium</span>
+      </span>
+    </div>
+  </header>
+
+  <!-- ============================ SHELL ============================ -->
+  <div class="app-shell">
+
+    <!-- ----------------------- MAIN ----------------------- -->
+    <main class="app-main">
+
+      <div class="app-main__head">
+        <p class="app-main__eyebrow">Buongiorno, Gianluca</p>
+        <h1 class="app-main__title">Panoramica del mese</h1>
+      </div>
+
+      <!-- WIDGET GRID -->
+      <section class="widget-grid" aria-label="Riepilogo del mese">
+
+        <article class="widget widget--feature">
+          <header class="widget__head">
+            <span class="widget__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/>
+              </svg>
+            </span>
+            <h2 class="widget__title">Saldo</h2>
+          </header>
+          <p class="widget__amount">€ 48.250<span class="widget__decimals">,90</span></p>
+          <p class="widget__sub">Disponibile sul conto corrente</p>
+        </article>
+
+        <article class="widget">
+          <header class="widget__head">
+            <span class="widget__icon widget__icon--in" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 19V5"/><path d="M6 11l6-6 6 6"/>
+              </svg>
+            </span>
+            <h2 class="widget__title">Entrate</h2>
+          </header>
+          <p class="widget__amount widget__amount--in">+ € 5.120<span class="widget__decimals">,00</span></p>
+          <p class="widget__sub">Accrediti di giugno</p>
+        </article>
+
+        <article class="widget">
+          <header class="widget__head">
+            <span class="widget__icon widget__icon--out" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14"/><path d="M6 13l6 6 6-6"/>
+              </svg>
+            </span>
+            <h2 class="widget__title">Uscite</h2>
+          </header>
+          <p class="widget__amount widget__amount--out">− € 2.389<span class="widget__decimals">,00</span></p>
+          <p class="widget__sub">Spese di giugno</p>
+        </article>
+
+      </section>
+
+      <!-- TRANSACTIONS -->
+      <section class="transactions-section" aria-label="Ultimi movimenti">
+        <h2 class="transactions-section__title">Ultimi Movimenti</h2>
+
+        <div class="transactions-section__table-wrap">
+          <table class="transactions">
+            <thead>
+              <tr>
+                <th scope="col">Descrizione</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Data</th>
+                <th scope="col" class="transactions__col-amount">Importo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Accredito stipendio</td>
+                <td>Entrata</td>
+                <td>27 mag 2026</td>
+                <td class="transactions__amount transactions__amount--in">+ € 3.450,00</td>
+              </tr>
+              <tr>
+                <td>Bonifico — Affitto studio</td>
+                <td>Casa</td>
+                <td>10 giu 2026</td>
+                <td class="transactions__amount transactions__amount--out">− € 1.200,00</td>
+              </tr>
+              <tr>
+                <td>Carta — Apple Store</td>
+                <td>Acquisti</td>
+                <td>24 mag 2026</td>
+                <td class="transactions__amount transactions__amount--out">− € 289,00</td>
+              </tr>
+              <tr>
+                <td>Rimborso assicurazione</td>
+                <td>Entrata</td>
+                <td>18 mag 2026</td>
+                <td class="transactions__amount transactions__amount--in">+ € 1.670,00</td>
+              </tr>
+              <tr>
+                <td>Bolletta energia</td>
+                <td>Utenze</td>
+                <td>05 giu 2026</td>
+                <td class="transactions__amount transactions__amount--out">− € 142,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+</body>
+</html>

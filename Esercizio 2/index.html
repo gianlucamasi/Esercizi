@@ -16,145 +16,44 @@
 <body class="app">
 
   <!-- ============================ HEADER ============================ -->
-  <header class="header" role="banner">
-    <div class="header__inner">
+  <header class="app-header">
+    <!-- Logo -->
+    <a class="app-header__brand" href="index.html" aria-label="LipariBank — Home">
+      <span class="app-header__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <path d="M16 2 3 9v3h26V9L16 2Z" fill="currentColor"/>
+          <rect x="6"  y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="12" y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="18" y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="24" y="14" width="3" height="9" fill="currentColor"/>
+          <rect x="3"  y="25" width="26" height="4" rx="1" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="app-header__name">LipariBank</span>
+    </a>
 
-      <!-- Brand -->
-      <a class="brand" href="#" aria-label="LipariBank — Home">
-        <span class="brand__mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" width="32" height="32" fill="none">
-            <path d="M16 2 3 9v3h26V9L16 2Z" fill="currentColor"/>
-            <rect x="6"  y="14" width="3" height="9" fill="currentColor"/>
-            <rect x="12" y="14" width="3" height="9" fill="currentColor"/>
-            <rect x="18" y="14" width="3" height="9" fill="currentColor"/>
-            <rect x="24" y="14" width="3" height="9" fill="currentColor"/>
-            <rect x="3"  y="25" width="26" height="4" rx="1" fill="currentColor"/>
-          </svg>
-        </span>
-        <span class="brand__text">
-          <span class="brand__name">LipariBank</span>
-          <span class="brand__tag">Private Banking</span>
-        </span>
-      </a>
+    <!-- Nav -->
+    <nav class="app-header__nav" aria-label="Navigazione primaria">
+      <ul class="app-header__nav-list">
+        <li><a class="app-header__nav-link app-header__nav-link--active" href="index.html" aria-current="page">Panoramica</a></li>
+        <li><a class="app-header__nav-link" href="dashboard.html">Dashboard</a></li>
+        <li><a class="app-header__nav-link" href="transactions.html">Movimenti</a></li>
+        <li><a class="app-header__nav-link" href="login.html">Accedi</a></li>
+      </ul>
+    </nav>
 
-      <!-- Navigazione primaria -->
-      <nav class="nav" aria-label="Navigazione primaria">
-        <ul class="nav__list">
-          <li class="nav__item"><a class="nav__link nav__link--active" href="#" aria-current="page">Dashboard</a></li>
-          <li class="nav__item"><a class="nav__link" href="#">Conti</a></li>
-          <li class="nav__item"><a class="nav__link" href="#">Investimenti</a></li>
-          <li class="nav__item"><a class="nav__link" href="#">Carte</a></li>
-        </ul>
-      </nav>
-
-      <!-- Info utente -->
-      <div class="user">
-        <button class="user__bell" type="button" aria-label="Notifiche (3 nuove)">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
-            <path d="M13.7 21a2 2 0 0 1-3.4 0"/>
-          </svg>
-          <span class="user__badge">3</span>
-        </button>
-        <div class="user__profile">
-          <span class="user__avatar" aria-hidden="true">GM</span>
-          <span class="user__meta">
-            <span class="user__name">Gianluca Masi</span>
-            <span class="user__role">Cliente Premium</span>
-          </span>
-        </div>
-      </div>
-
+    <!-- User info -->
+    <div class="app-header__user">
+      <span class="app-header__avatar" aria-hidden="true">GM</span>
+      <span class="app-header__user-meta">
+        <span class="app-header__user-name">Gianluca Masi</span>
+        <span class="app-header__user-role">Cliente Premium</span>
+      </span>
     </div>
   </header>
 
   <!-- ============================ SHELL ============================ -->
   <div class="shell">
-
-    <!-- ----------------------- SIDEBAR ----------------------- -->
-    <aside class="sidebar" aria-label="Menu laterale">
-      <nav class="sidebar__nav" aria-label="Sezioni del conto">
-        <p class="sidebar__heading">Operatività</p>
-        <ul class="sidebar__list">
-
-          <li class="sidebar__item">
-            <a class="sidebar__link sidebar__link--active" href="#" aria-current="page">
-              <span class="sidebar__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/>
-                  <rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>
-                </svg>
-              </span>
-              <span class="sidebar__label">Panoramica</span>
-            </a>
-          </li>
-
-          <li class="sidebar__item">
-            <a class="sidebar__link" href="#">
-              <span class="sidebar__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 7h18v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7Z"/><path d="M3 7l2.5-3h13L21 7"/><path d="M16 12a2 2 0 1 0 0 4h5v-4h-5Z"/>
-                </svg>
-              </span>
-              <span class="sidebar__label">Conti correnti</span>
-            </a>
-          </li>
-
-          <li class="sidebar__item">
-            <a class="sidebar__link" href="#">
-              <span class="sidebar__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 17l5-5 4 3 8-8"/><path d="M16 4h4v4"/>
-                </svg>
-              </span>
-              <span class="sidebar__label">Movimenti</span>
-            </a>
-          </li>
-
-          <li class="sidebar__item">
-            <a class="sidebar__link" href="#">
-              <span class="sidebar__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 3l8 3v6c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V6l8-3Z"/><path d="M9 12l2 2 4-4"/>
-                </svg>
-              </span>
-              <span class="sidebar__label">Polizze</span>
-            </a>
-          </li>
-
-          <li class="sidebar__item">
-            <a class="sidebar__link" href="#">
-              <span class="sidebar__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.8.3-1.4 1-1.4 1.9v.3"/><path d="M12 17h.01"/>
-                </svg>
-              </span>
-              <span class="sidebar__label">Prestiti</span>
-            </a>
-          </li>
-        </ul>
-
-        <p class="sidebar__heading sidebar__heading--spaced">Sistema</p>
-        <ul class="sidebar__list">
-          <li class="sidebar__item">
-            <a class="sidebar__link" href="#">
-              <span class="sidebar__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.14.63.66 1.11 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/>
-                </svg>
-              </span>
-              <span class="sidebar__label">Impostazioni</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="sidebar__promo">
-        <span class="sidebar__promo-kicker">Wealth Advisory</span>
-        <p class="sidebar__promo-text">Il tuo consulente dedicato è disponibile oggi.</p>
-        <button class="sidebar__promo-btn" type="button">Prenota call</button>
-      </div>
-    </aside>
 
     <!-- ----------------------- MAIN ----------------------- -->
     <main class="main" id="contenuto">

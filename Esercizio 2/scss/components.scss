@@ -1,0 +1,215 @@
+// =====================================================================
+//  LipariBank · Componenti — Form di login (SCSS)
+//  Foglio autonomo: replica il sottoinsieme di token/mixin di styles.scss
+//  necessario al componente, così compila senza dipendenze esterne.
+//  Architettura: variabili → mixin → reset → componente (BEM)
+// =====================================================================
+
+// ----------------------------- VARIABILI ----------------------------
+// Colori istituzionali (coerenti con styles.scss)
+$color-primary:        #1a365d; // navy
+$color-primary-900:    #0d1c33;
+$color-secondary:      #c8a84b; // oro
+$color-secondary-300:  #e2cd8c;
+
+$color-bg:             #f4f6f9;
+$color-surface:        #ffffff;
+$color-border:         #e3e8f0;
+$color-ink:            #1c2433;
+$color-ink-soft:       #5a6577;
+$color-ink-faint:      #8b94a3;
+$color-negative:       #b4452f;
+
+// Tipografia
+$font-display: "Fraunces", Georgia, "Times New Roman", serif;
+$font-body:    "Manrope", "Segoe UI", system-ui, sans-serif;
+
+// Forma e profondità
+$radius:     14px;
+$radius-sm:  10px;
+$shadow-sm:  0 1px 2px rgba(13, 28, 51, .06);
+$shadow-lg:  0 24px 60px -28px rgba(13, 28, 51, .45);
+
+// Breakpoint mobile specifico per il componente
+$bp-mobile: 576px;
+
+// ------------------------------ MIXIN -------------------------------
+@mixin respond-down($bp: $bp-mobile) {
+  @media (max-width: ($bp - 1px)) { @content; }
+}
+@mixin flex-center { display: flex; align-items: center; justify-content: center; }
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid $color-secondary;
+    outline-offset: 2px;
+  }
+}
+
+// ------------------------------ RESET -------------------------------
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+.login-page-body {
+  font-family: $font-body;
+  color: $color-ink;
+  background-color: $color-bg;
+  // texture diagonale finissima + alone navy in alto (come la dashboard)
+  background-image:
+    radial-gradient(120% 60% at 100% 0%, rgba(26, 54, 93, .06), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(26, 54, 93, .018) 0 2px, transparent 2px 11px);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+// =========================== LOGIN PAGE =============================
+// Il <main>: centra il form verticalmente e orizzontalmente (Flexbox).
+.login-page {
+  @include flex-center;
+  min-height: 100vh;
+  padding: 1.5rem;
+
+  @include respond-down {
+    padding: 16px;
+  }
+}
+
+// ============================== LOGIN ==============================
+// Il form: card chiara, larghezza max 400px.
+.login {
+  width: 100%;
+  max-width: 400px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  box-shadow: $shadow-lg;
+  padding: 2.5rem;
+
+  @include respond-down {
+    width: 100%;
+    padding: 16px;
+  }
+
+  &__fieldset {
+    border: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  &__legend {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: $color-primary;
+    letter-spacing: -.01em;
+    // <legend> non rispetta gap del flex padre: spaziatura esplicita
+    padding: 0;
+    margin-bottom: .25rem;
+  }
+
+  // --------- Brand (link alla home) ---------
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+    margin-bottom: .5rem;
+    text-decoration: none;
+    color: inherit;
+    width: fit-content;
+    border-radius: $radius-sm;
+    @include focus-ring;
+  }
+  &__brand-mark {
+    @include flex-center;
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    color: $color-primary-900;
+    background: linear-gradient(150deg, $color-secondary-300, $color-secondary);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25), $shadow-sm;
+  }
+  &__brand-name {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: $color-primary;
+  }
+
+  // --------- Campo ---------
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: .375rem;
+  }
+
+  &__label {
+    font-weight: 600;
+    font-size: .9rem;
+    color: $color-ink;
+  }
+
+  &__input {
+    width: 100%;
+    padding: .75rem .875rem;
+    font: inherit;
+    color: $color-ink;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    transition: border-color .16s ease, box-shadow .16s ease;
+    @include focus-ring;
+
+    &::placeholder { color: $color-ink-faint; }
+
+    &:focus {
+      border-color: $color-secondary;
+      box-shadow: 0 0 0 3px rgba(200, 168, 75, .18);
+    }
+
+    // Errore sobrio: solo dopo che l'utente ha interagito col campo
+    &:user-invalid {
+      border-color: $color-negative;
+    }
+  }
+
+  &__hint {
+    font-size: .76rem;
+    color: $color-ink-faint;
+  }
+
+  // --------- Bottone submit (oro su navy) ---------
+  &__submit {
+    margin-top: .5rem;
+    width: 100%;
+    padding: .8rem 1rem;
+    border: 0;
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    color: $color-primary-900;
+    background: $color-secondary;
+    transition: background-color .16s ease, transform .16s ease;
+    @include focus-ring;
+
+    &:hover { background: $color-secondary-300; transform: translateY(-1px); }
+    &:active { transform: translateY(0); }
+  }
+
+  // --------- Link alternativi ---------
+  &__alt {
+    margin-top: .25rem;
+    text-align: center;
+    font-size: .82rem;
+    color: $color-ink-faint;
+  }
+  &__alt-link {
+    color: $color-primary;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    @include focus-ring;
+    &:hover { color: $color-secondary; text-decoration: underline; }
+  }
+}
